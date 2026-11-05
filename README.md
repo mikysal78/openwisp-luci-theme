@@ -43,6 +43,12 @@ the size limit (32 KB by default): a small SVG is ideal. The file type is
 checked from its bytes (SVG, PNG, JPEG, WebP, GIF); SVGs with scripts, event
 handlers, external references or entities are rejected.
 
+**Logo size**: LuCI shows it 28 pixels high and at most 220 wide (24 × 150 on
+phones), so a horizontal logo works best, up to about 8 times wider than high,
+without empty margins (for an SVG, a tight `viewBox`). For PNG, JPEG, WebP and
+GIF use double size, 56 pixels high and at most 440 wide, so it stays sharp on
+high-density screens.
+
 Basic mode simplifies the interface: it is **not access control**.
 
 ## Installation
@@ -53,7 +59,7 @@ the `luci-theme-ninux` package.
 1. Install the package in the OpenWISP virtualenv:
 
    ```sh
-   pip install https://github.com/mikysal78/openwisp-luci-theme/releases/download/v0.1.0/openwisp_luci_theme-0.1.0-py3-none-any.whl
+   pip install https://github.com/mikysal78/openwisp-luci-theme/releases/download/v0.1.1/openwisp_luci_theme-0.1.1-py3-none-any.whl
    ```
 
 2. Add it to `INSTALLED_APPS` **after** `openwisp_users` and
@@ -65,7 +71,7 @@ the `luci-theme-ninux` package.
    openwisp2_extra_django_apps:
      - "openwisp_luci_theme"
    openwisp2_extra_python_packages:
-     - "openwisp-luci-theme @ git+https://github.com/mikysal78/openwisp-luci-theme@v0.1.0"
+     - "openwisp-luci-theme @ git+https://github.com/mikysal78/openwisp-luci-theme@v0.1.1"
    ```
 
 3. Import the **Tema LuCI ninux** template and assign it to the routers. The

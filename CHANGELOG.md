@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1
+
+- The help text of the logo upload gives the size: LuCI shows the logo 28
+  pixels high and at most 220 wide (24 × 150 on phones); for raster images,
+  56 × 440 at most (double size, for high-density screens).
+
 ## 0.1.0
 
 - First release: **LuCI theme of the routers** box on the organization page,

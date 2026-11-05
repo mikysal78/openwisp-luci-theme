@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openwisp-luci-theme\n"
-"POT-Creation-Date: 2026-11-05 19:43+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-05 20:15+0100\n"
 "PO-Revision-Date: 2026-11-05 20:00+0100\n"
 "Last-Translator: Michele Salerno\n"
 "Language-Team: Italian\n"
@@ -16,63 +17,74 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: admin.py:34
+#: admin.py:36
 msgid "The file is empty."
 msgstr "Il file è vuoto."
 
-#: admin.py:35
+#: admin.py:37
 #, python-format
 msgid ""
 "The logo is larger than %(max_size)s: use a smaller image (an SVG is ideal)."
-msgstr "Il logo supera %(max_size)s: usa un'immagine più leggera (l'ideale è un SVG)."
+msgstr ""
+"Il logo supera %(max_size)s: usa un'immagine più leggera (l'ideale è un SVG)."
 
-#: admin.py:36
+#: admin.py:38
 msgid "Unsupported file: upload an SVG, PNG, JPEG, WebP or GIF image."
 msgstr "File non supportato: carica un'immagine SVG, PNG, JPEG, WebP o GIF."
 
-#: admin.py:37
+#: admin.py:40
 msgid ""
 "The SVG contains scripts, event handlers or external references: remove them "
 "and try again."
-msgstr "L'SVG contiene script, gestori di eventi o riferimenti esterni: toglili e riprova."
+msgstr ""
+"L'SVG contiene script, gestori di eventi o riferimenti esterni: toglili e "
+"riprova."
 
-#: admin.py:43
+#: admin.py:47
 msgid "Upload logo"
 msgstr "Carica il logo"
 
-#: admin.py:46
+#: admin.py:50
 #, python-format
 msgid ""
 "SVG (recommended), PNG, JPEG, WebP or GIF, at most %(max)s. It is sent to "
 "the routers inside their configuration, so it is shown even without Internet "
-"access."
-msgstr "SVG (consigliato), PNG, JPEG, WebP o GIF, al massimo %(max)s. Arriva ai router dentro la loro configurazione, quindi si vede anche senza Internet."
+"access. Size: LuCI shows it 28 pixels high and at most 220 wide (24 × 150 on "
+"phones), so use a horizontal logo, up to about 8 times wider than high, "
+"without empty margins; for PNG, JPEG, WebP and GIF, 56 pixels high and at "
+"most 440 wide (double size, sharp on high-density screens)."
+msgstr "SVG (consigliato), PNG, JPEG, WebP o GIF, al massimo %(max)s. Arriva ai router dentro la loro configurazione, quindi si vede anche senza Internet. Dimensioni: LuCI lo mostra alto 28 pixel e largo al massimo 220 (24 × 150 sul telefono), quindi serve un logo orizzontale, largo fino a circa 8 volte l'altezza, senza margini vuoti; per PNG, JPEG, WebP e GIF, alto 56 pixel e largo al massimo 440 (il doppio, così resta nitido sugli schermi ad alta densità)."
 
-#: admin.py:53
+#: admin.py:61
 msgid "Remove logo"
 msgstr "Togli il logo"
 
-#: admin.py:55
+#: admin.py:63
 msgid "Go back to the logo of the global setting (Ninux by default)."
-msgstr "Torna al logo dell'impostazione globale (quello di Ninux, se non è cambiato)."
+msgstr ""
+"Torna al logo dell'impostazione globale (quello di Ninux, se non è cambiato)."
 
-#: admin.py:98 admin.py:99
+#: admin.py:114 admin.py:115
 msgid "LuCI theme of the routers"
 msgstr "Tema LuCI dei router"
 
-#: admin.py:106
+#: admin.py:122
 msgid ""
 "Logo, name and colors of LuCI on the routers of this organization, and its "
 "Basic/Advanced mode. Empty fields keep the global setting. It applies to "
 "routers with the «Tema LuCI ninux» template and the luci-theme-ninux "
 "package; variables set on a single device still win."
-msgstr "Logo, nome e colori di LuCI sui router di questa organizzazione, e la sua modalità Base/Avanzato. I campi vuoti lasciano l'impostazione globale. Vale per i router con il template «Tema LuCI ninux» e il pacchetto luci-theme-ninux; le variabili scritte nel singolo device vincono comunque."
+msgstr ""
+"Logo, nome e colori di LuCI sui router di questa organizzazione, e la sua "
+"modalità Base/Avanzato. I campi vuoti lasciano l'impostazione globale. Vale "
+"per i router con il template «Tema LuCI ninux» e il pacchetto luci-theme-"
+"ninux; le variabili scritte nel singolo device vincono comunque."
 
-#: admin.py:124
+#: admin.py:140
 msgid "current logo"
 msgstr "logo attuale"
 
-#: admin.py:127
+#: admin.py:143
 msgid "Global setting (Ninux logo by default)"
 msgstr "Impostazione globale (il logo di Ninux, se non è cambiato)"
 
@@ -131,7 +143,9 @@ msgstr "colore d'accento"
 #: models.py:50
 msgid ""
 "Color of buttons, links and active menu items (light scheme), e.g. #d93d1c."
-msgstr "Colore di pulsanti, link e voce di menu attiva (tema chiaro), per esempio #d93d1c."
+msgstr ""
+"Colore di pulsanti, link e voce di menu attiva (tema chiaro), per esempio "
+"#d93d1c."
 
 #: models.py:53
 msgid "accent color (dark scheme)"
@@ -141,7 +155,9 @@ msgstr "colore d'accento (tema scuro)"
 msgid ""
 "Used when the browser is in dark mode; if empty, the accent color above is "
 "used."
-msgstr "Si usa quando il browser è in modalità scura; se è vuoto vale il colore d'accento qui sopra."
+msgstr ""
+"Si usa quando il browser è in modalità scura; se è vuoto vale il colore "
+"d'accento qui sopra."
 
 #: models.py:60
 msgid "initial mode"
@@ -149,7 +165,8 @@ msgstr "modalità iniziale"
 
 #: models.py:64
 msgid "Mode LuCI opens with; everyone can then change it from the switch."
-msgstr "Modalità con cui si apre LuCI; ognuno può poi cambiarla dall'interruttore."
+msgstr ""
+"Modalità con cui si apre LuCI; ognuno può poi cambiarla dall'interruttore."
 
 #: models.py:67
 msgid "Advanced mode available"
@@ -157,7 +174,8 @@ msgstr "Modalità Avanzato disponibile"
 
 #: models.py:71
 msgid "Basic mode simplifies the interface, it is not access control."
-msgstr "La modalità Base semplifica l'interfaccia, non è un controllo di accesso."
+msgstr ""
+"La modalità Base semplifica l'interfaccia, non è un controllo di accesso."
 
 #: models.py:73
 msgid "modified"

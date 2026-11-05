@@ -48,7 +48,11 @@ class LuciThemeForm(forms.ModelForm):
         required=False,
         help_text=_(
             "SVG (recommended), PNG, JPEG, WebP or GIF, at most %(max)s. It is sent to the routers "
-            "inside their configuration, so it is shown even without Internet access."
+            "inside their configuration, so it is shown even without Internet access. "
+            "Size: LuCI shows it 28 pixels high and at most 220 wide (24 × 150 on phones), so use a "
+            "horizontal logo, up to about 8 times wider than high, without empty margins; for PNG, "
+            "JPEG, WebP and GIF, 56 pixels high and at most 440 wide (double size, sharp on "
+            "high-density screens)."
         )
         % {"max": filesizeformat(app_settings.MAX_LOGO_SIZE)},
         widget=forms.ClearableFileInput(attrs={"accept": LOGO_ACCEPT}),
