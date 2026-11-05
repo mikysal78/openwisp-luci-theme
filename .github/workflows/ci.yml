@@ -1,0 +1,103 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - run: pip install ruff
+      - name: Ruff
+        run: |
+          ruff check .
+          ruff format --check .
+      - name: Integration script (sh -n)
+        run: sh -n integration/run.sh
+      - name: Italian translation (.po valid and .mo up to date)
+        run: |
+          sudo apt-get install -y -qq gettext
+          cd openwisp_luci_theme/locale/it/LC_MESSAGES
+          msgfmt -c -o /tmp/django.mo django.po
+          cmp /tmp/django.mo django.mo
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: pip install pytest
+      - name: Tests (logo and variables, no OpenWISP needed)
+        run: pytest -v
+
+  # Il modulo dentro un OpenWISP vero: progetto di test di openwisp-controller,
+  # SpatiaLite, niente Redis (vedi integration/run.sh).
+  integration:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        openwisp-controller: ["1.3.2"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - run: sudo apt-get install -y -qq libsqlite3-mod-spatialite gdal-bin
+      - run: pip install "openwisp-controller==${{ matrix.openwisp-controller }}" "django~=5.2.0"
+      - name: Integration tests and migrations check
+        run: integration/run.sh "${{ matrix.openwisp-controller }}" "$RUNNER_TEMP/integration"
+
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - run: pip install pip-audit .
+      # The package has no dependencies of its own besides openwisp-controller:
+      # vulnerabilities in the OpenWISP stack are reported in the job summary
+      # (and by Dependabot) without failing CI, since they are fixed by
+      # upgrading OpenWISP, not this package.
+      - name: Known vulnerabilities in the OpenWISP stack (report)
+        run: |
+          {
+            echo "## pip-audit (OpenWISP stack)"
+            echo '```'
+            pip-audit --progress-spinner off 2>&1 || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          if ! pip-audit --progress-spinner off >/dev/null 2>&1; then
+            echo "::warning::pip-audit found known vulnerabilities in the OpenWISP stack: see the job summary"
+          fi
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - run: pip install build
+      - run: python -m build
+      - name: Wheel contents
+        run: python ci/check_wheel.py dist/*.whl
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist/

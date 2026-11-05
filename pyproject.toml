@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openwisp-luci-theme"
+dynamic = ["version"]
+description = "Per-organization LuCI theme of the routers in OpenWISP: logo upload, name, colors and Basic/Advanced mode for luci-theme-ninux"
+readme = "README.md"
+license = { text = "GPL-3.0-or-later" }
+authors = [{ name = "Michele Salerno" }]
+requires-python = ">=3.10"
+dependencies = ["openwisp-controller>=1.1"]
+classifiers = [
+    "Framework :: Django",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Programming Language :: Python :: 3",
+]
+
+[project.urls]
+Homepage = "https://github.com/mikysal78/openwisp-luci-theme"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["openwisp_luci_theme*"]
+
+[tool.setuptools.dynamic]
+version = { attr = "openwisp_luci_theme.__version__" }
+
+[tool.setuptools.package-data]
+openwisp_luci_theme = ["locale/*/LC_MESSAGES/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+"openwisp_luci_theme/migrations/*" = ["E501"]
